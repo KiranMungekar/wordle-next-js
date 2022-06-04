@@ -39,8 +39,10 @@ export default observer( function Home(){
             <h1>{store.loss}</h1>
           </div>
         </div>
+       
         {/* <h1>Word: {store.word}</h1> */}
       </main>
+      <Qwerty store={store} />
     </div>
   )
 }) 

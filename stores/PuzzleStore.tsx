@@ -50,5 +50,41 @@ export default {
             this.userGuesses[this.currentGuess] = this.userGuesses[this.currentGuess] + e.key.toLowerCase();
         }
     },
+    handleQwertyBtn (e) {
+        
+        const key:string = e.currentTarget.textContent.trim();
+        if(this.won || this.lost){
+            return
+        }
+        console.log(this.userGuesses[this.currentGuess].length);
+        if(this.userGuesses[this.currentGuess].length >= 5){
+            return this.submitGuess()
+        }
+        console.log(key != null && key.length === 1 && key.match(/^[A-z]$/))
+        if(key != null && key.length === 1 && key.match(/^[A-z]$/)){
+            this.userGuesses[this.currentGuess] = this.userGuesses[this.currentGuess] + key.toLowerCase();
+        }
+    },
+    get allGuesses() {
+        return this.guesses.slice(0, this.currentGuess).join('').split('')
+      },
+      get exactGuesses() {
+        return (
+          this.word
+            .split('')
+            // if any guesses include this letter in this position/index
+            .filter((letter, i) => {
+              return this.guesses
+                .slice(0, this.currentGuess)
+                .map((word) => word[i])
+                .includes(letter)
+            })
+        )
+      },
+      get inexactGuesses() {
+        return this.word
+          .split('')
+          .filter((letter) => this.allGuesses.includes(letter))
+      },
 
 }
