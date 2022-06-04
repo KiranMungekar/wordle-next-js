@@ -28,10 +28,7 @@ export default {
         this.currentGuess = 0
     },
     submitGuess(){
-        console.log('guessSubmitted')
-        //if(words.includes(this.userGuesses[this.currentGuess])){
         this.currentGuess += 1
-        //}
     },
     handleKeyUp (e) {
         if(this.won || this.lost){
@@ -39,7 +36,6 @@ export default {
 
         }
         if(e.key === 'Enter' || this.userGuesses[this.currentGuess].length == 5){
-            console.log(this.userGuesses[this.currentGuess].length)
             return this.submitGuess()
         }
 
