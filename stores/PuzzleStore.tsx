@@ -28,6 +28,7 @@ export default {
         this.currentGuess = 0
     },
     submitGuess(){
+        console.log('guessSubmitted')
         //if(words.includes(this.userGuesses[this.currentGuess])){
         this.currentGuess += 1
         //}
@@ -38,6 +39,7 @@ export default {
 
         }
         if(e.key === 'Enter' || this.userGuesses[this.currentGuess].length == 5){
+            console.log(this.userGuesses[this.currentGuess].length)
             return this.submitGuess()
         }
 
@@ -56,14 +58,14 @@ export default {
         if(this.won || this.lost){
             return
         }
-        console.log(this.userGuesses[this.currentGuess].length);
-        if(this.userGuesses[this.currentGuess].length >= 5){
-            return this.submitGuess()
-        }
-        console.log(key != null && key.length === 1 && key.match(/^[A-z]$/))
-        if(key != null && key.length === 1 && key.match(/^[A-z]$/)){
+        if(this.userGuesses[this.currentGuess].length <= 5 && key != null && key.length === 1 && key.match(/^[A-z]$/)){
             this.userGuesses[this.currentGuess] = this.userGuesses[this.currentGuess] + key.toLowerCase();
         }
+        console.log(this.userGuesses[this.currentGuess].length);
+        if(this.userGuesses[this.currentGuess].length === 5){
+            return this.submitGuess()
+        }
+        
     },
     get allGuesses() {
         return this.guesses.slice(0, this.currentGuess).join('').split('')
